@@ -1,0 +1,71 @@
+<!-- Modal -->
+<!-- <div id="modalOpener" data-toggle="modal" data-target="#exampleModalCenter"></div> -->
+<div class="modal fade" id="modalProductDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <!-- style="display: block" [style.display]="showModal ? 'block' : 'none'" -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-body" *ngIf="inputDress">
+          <h5 class="modal-title" id="modalProductDetailTitle">{{inputDress.customer.firstName}}
+            ({{inputDress.customer.invoiceId}})</h5>
+        </div>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeProductDetail()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" *ngIf="inputDress">
+        <div class="row">
+          <div class="col-md-4">Order Date: {{inputDress.orderDate | date}}</div>
+          <div class="col-md-4">
+            <div *ngIf="inputDress.deliverydate">
+              Delivery Date: {{inputDress.deliverydate | date}}
+            </div>
+          </div>
+          <div class="col-md-4"></div>
+        </div>
+        <div *ngFor="let measurement of inputDress.measurements">
+          <div class="row measurement-heading"><strong>{{inputDress.dressId}}</strong></div>
+          <div *ngIf="measurement.rawDressImageList.length">
+          <div class="row measurement-heading"><strong>Raw Image</strong></div>
+          <div class="row list-dress-image">
+            <div class="col-md-4" *ngFor="let rawImage of measurement.rawDressImageList">
+              <img src="../../assets/image/{{rawImage}}" class="img-fluid rounded" alt="dress details">
+            </div>
+          </div>
+          </div>
+          <div *ngIf="measurement.patternImageList.length">
+          <div class="row measurement-heading"><strong>Pattern Image</strong></div>
+          <div class="row list-dress-image" *ngFor="let patternImage of measurement.patternImageList">
+            <div class="col-md-4">
+              <img src="../../assets/image/{{patternImage}}" class="img-fluid rounded" alt="dress details">
+            </div>
+          </div>
+          </div>
+          <div *ngIf="measurement.measurementImageList.length">
+          <div class="row measurement-heading"><strong>Measurement Image</strong></div>
+          <div class="row list-dress-image" *ngFor="let measurementImage of measurement.measurementImageList">
+            <div class="col-md-4">
+              <img src="../../assets/image/{{measurementImage}}" class="img-fluid rounded" alt="dress details">
+            </div>
+          </div>
+          </div>
+          <div *ngIf="measurement.seavedImageList.length">
+          <div class="row measurement-heading"><strong>Seaved Image</strong></div>
+          <div class="row list-dress-image" *ngFor="let seavedImage of measurement.seavedImageList">
+            <div class="col-md-4">
+              <img src="../../assets/image/{{seavedImage}}" class="img-fluid rounded" alt="dress details">
+            </div>
+          </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Paid Amount</button>
+        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button> -->
+        <button type="button" class="btn btn-primary">Delivered</button>
+      </div>
+    </div>
+  </div>
+</div>

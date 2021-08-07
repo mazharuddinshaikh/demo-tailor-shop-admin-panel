@@ -1,0 +1,13 @@
+li{
+    cursor: pointer;
+}
+
+card-filter {
+    margin-left: 8px;
+    margin-right: 8px;
+    padding: 8px 4px 8px 4px;
+}
+
+ul li a:visited {
+    font-weight:bold;
+}

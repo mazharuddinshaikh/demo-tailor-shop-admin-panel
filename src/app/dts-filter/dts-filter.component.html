@@ -1,0 +1,10 @@
+<div id="filter-component">
+    <ul class="card card-filter">
+        <li (click)="updateDressList('all')">all</li>
+        <div *ngFor="let dressType of dressTypeList">
+            <li (click)="updateDressList(dressType.typeName)">
+                    {{dressType.typeName | uppercase}} ( {{dressType.typeDescription}} )
+            </li>
+        </div>
+    </ul>
+</div>

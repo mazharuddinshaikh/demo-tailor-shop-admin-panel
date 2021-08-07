@@ -1,0 +1,10 @@
+.dts-footer{
+    background-color: #45802a;
+    color: white;
+    font-family: 'Mate SC', serif;
+    /* font-weight: bold;     */
+}
+#dts-footer-copyright {
+    font-style: italic;
+    font-weight: bolder;
+}
