@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, from, Observable } from 'rxjs';
 import { Dress } from '../model/dress';
 import { environment } from '../../environments/environment'
+import { AuthenticationService } from './authentication.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class DtsProductService {
   public notifyDressList = new BehaviorSubject<string>('');
   notifyDressListObservable = this.notifyDressList.asObservable();
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private authService: AuthenticationService) { }
 
   public notifyOther(dressType: string) {
     console.log('notify other called' + dressType);
@@ -69,13 +70,17 @@ export class DtsProductService {
   // }
 
   public getProductList(dressType: string): Observable<Dress[]> {
-
-    console.log('From service' + dressType)
-    if(dressType === 'all'){
-      return this.httpClient.get<Dress[]>(`${environment.baseUri}api/v1/dress/allDress`);
+    const authToken: string = this.authService.getAuthToken();
+    let url: string = '';
+    if (dressType === 'all') {
+      url = `${environment.baseUri}/api/v1/dress/allDress`;
     } else {
-      return this.httpClient.get<Dress[]>(`${environment.baseUri}api/v1/dress/allDress/${dressType}`);
+      url = `${environment.baseUri}/api/v1/dress/allDress/${dressType}`;
     }
-    
+    return this.httpClient.get<Dress[]>(url, {
+      headers: {
+        'Authorization': `Bearer ${authToken}`
+      }
+    });
   }
 }

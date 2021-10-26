@@ -34,7 +34,14 @@ export class DtsDressTypeService {
   //   return dressTypes;
   // }
 
-  public getDressTypesList(): Observable<DressType[]> {
-    return this.httpClient.get<DressType[]>(environment.baseUri + "api/v1/dressTypes/allDressTypes");
+  public getDressTypesList(authToken: string): Observable<any> {
+
+    return this.httpClient.get(`${environment.baseUri}/api/v1/dressTypes/allDressTypes`,
+    {
+      headers: {
+        'Authorization': `Bearer ${authToken}`
+      }
+    }
+    );
   }
 }

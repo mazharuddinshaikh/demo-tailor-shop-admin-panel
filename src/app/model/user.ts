@@ -13,5 +13,5 @@ export interface User {
         address?: string;
         createdAt?: string;
         updatedAt?: string;
-    
+        authenticationToken ?: string;
 }

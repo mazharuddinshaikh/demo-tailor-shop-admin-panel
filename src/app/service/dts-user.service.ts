@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -17,8 +17,14 @@ export class DtsUserService {
     let user = { userName: userName, password: password };
     let header = new HttpHeaders();
     header.set('content-type', 'application/x-www-form-urlencoded');
-    return this.httpClient.post(`${environment.baseUri}user/login`, user, {
-      headers: {'content-type': 'application/json'}
+    const body = new HttpParams()
+    .set('userName', userName)
+    .set('password', password);
+    return this.httpClient.post<HttpResponse<User>>(`${environment.baseUri}/api/v1/user/login`, body,  {
+      observe: 'response'
+      // headers: {'content-type': 'application/json'}
+      // headers: {'content-type': 'aapplication/x-www-form-urlencoded'}
+      
     });
   }
 }
