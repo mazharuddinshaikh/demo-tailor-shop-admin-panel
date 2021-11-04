@@ -11,20 +11,19 @@ export class DtsUserService {
 
   constructor(private httpClient: HttpClient) { }
   // post request  - header form url encoded(xxx-www-for-urlencoded) body - (userName, password, mobileNo, email)
-  public login(user1: User): Observable<any> {
-    let userName = "mazhar";
-    let password = "mazhar123"
-    let user = { userName: userName, password: password };
+  public login(user: User): Observable<any> {
+    // let userName = "mazhar";
+    // let password = "mazhar123"
+    // let user = { userName: userName, password: password };
     let header = new HttpHeaders();
     header.set('content-type', 'application/x-www-form-urlencoded');
     const body = new HttpParams()
-    .set('userName', userName)
-    .set('password', password);
+    .set('userName', user.userName)
+    .set('password', user.password);
     return this.httpClient.post<HttpResponse<User>>(`${environment.baseUri}/api/v1/user/login`, body,  {
       observe: 'response'
       // headers: {'content-type': 'application/json'}
       // headers: {'content-type': 'aapplication/x-www-form-urlencoded'}
-      
     });
   }
 }

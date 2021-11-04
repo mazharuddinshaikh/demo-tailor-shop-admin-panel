@@ -13,13 +13,14 @@ import { DtsProductComponent } from './dts-product/dts-product.component';
 import { DtsProductDetailComponent } from './dts-product-detail/dts-product-detail.component';
 import { RouterModule, Routes } from '@angular/router';
 import { DtsSigninComponent } from './dts-signin/dts-signin.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { DtsSignOutComponent } from './dts-sign-out/dts-sign-out.component';
 
 const routes: Routes = [
   {path: 'home', component: DtsHomeComponent},
   {path: 'productDetail', component: DtsProductDetailComponent},
+  {path: 'signin', component: DtsSigninComponent},
   {path: '', component: DtsSigninComponent}
-
-
 ];
 
 @NgModule({
@@ -34,12 +35,14 @@ const routes: Routes = [
     DtsProductComponent,
     DtsProductDetailComponent,
     DtsSigninComponent,
+    DtsSignOutComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     RouterModule.forRoot(routes),
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
